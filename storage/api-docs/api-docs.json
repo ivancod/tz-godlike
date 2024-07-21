@@ -1,0 +1,506 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Book API",
+        "description": "Book API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Select all books",
+                "description": "Select all books",
+                "operationId": "9017a3fa89d6636329067c858b27a6fa",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Book"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No books found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No books found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Create a book",
+                "description": "Create a book",
+                "operationId": "59930c571753349326c9d54a2a68645a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "author",
+                                    "published_at",
+                                    "genre",
+                                    "amount_words",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Book title"
+                                    },
+                                    "publisher": {
+                                        "type": "string",
+                                        "example": "Publisher name"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Author name"
+                                    },
+                                    "published_at": {
+                                        "type": "string",
+                                        "example": "2021-01-01"
+                                    },
+                                    "genre": {
+                                        "type": "string",
+                                        "example": "Genre"
+                                    },
+                                    "amount_words": {
+                                        "type": "integer",
+                                        "example": 1000
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "example": 10.99
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Book"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Select a book by id",
+                "description": "Select a book by id",
+                "operationId": "ebd8b0db5baaab3840796b5e895cd995",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Book ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Book"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Book not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Book not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Delete a book",
+                "description": "Delete a book",
+                "operationId": "2767d4a230fa8abb5d368279be80a763",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Book ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Book deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Book not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Book not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Update a book",
+                "description": "Update a book",
+                "operationId": "3c5c1488774a14a2fa2e72f9ccee25d5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Book ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "author",
+                                    "published_at",
+                                    "genre",
+                                    "amount_words",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Book title"
+                                    },
+                                    "publisher": {
+                                        "type": "string",
+                                        "example": "Publisher name"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Author name"
+                                    },
+                                    "published_at": {
+                                        "type": "string",
+                                        "example": "2021-01-01"
+                                    },
+                                    "genre": {
+                                        "type": "string",
+                                        "example": "Genre"
+                                    },
+                                    "amount_words": {
+                                        "type": "integer",
+                                        "example": 1000
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "example": 10.99
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Book"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Book not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Book not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Book": {
+                "required": [
+                    "title",
+                    "author",
+                    "published_at",
+                    "genre",
+                    "amount_words",
+                    "price"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Book title"
+                    },
+                    "author": {
+                        "type": "string",
+                        "example": "Author name"
+                    },
+                    "published_at": {
+                        "type": "string",
+                        "example": "2021-01-01"
+                    },
+                    "genre": {
+                        "type": "string",
+                        "example": "Genre"
+                    },
+                    "amount_words": {
+                        "type": "integer",
+                        "example": 1000
+                    },
+                    "price": {
+                        "type": "number",
+                        "example": 10.99
+                    },
+                    "cyrency": {
+                        "type": "string",
+                        "example": "USD"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Books",
+            "description": "Books"
+        }
+    ]
+}
