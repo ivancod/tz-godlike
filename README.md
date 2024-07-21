@@ -50,3 +50,4 @@ This section provides instructions on how to install the Laravel project on a lo
     ```
 
 7. You can see the API documentation by visiting `http://172.21.2.3/docs` in your browser.
+![image](https://github.com/user-attachments/assets/0e919c3a-bec2-4e92-9421-3c8da27a53ef)
