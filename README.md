@@ -26,6 +26,8 @@ This section provides instructions on how to install the Laravel project on a lo
 3. In container you need execute this commands for additional permissions for write logs and cache. 
 
     ```shell
+    docker-compose exec php bash
+    
     chmode 777 -R storage/logs
     chmode 777 -R storage/framework
     ```
